@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Cursos da Faculdade do Futuro - disciplinas e informações.">
   <title>Cursos - Faculdade do Futuro</title>
-  <link rel="icon" href="imagem/favicon.ico" type="image/ico">
+  <link rel="icon" href="https://faculdadedofuturo.com.br/wp-content/uploads/2021/08/cropped-Favicon-32x32.png" type="image/png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -35,6 +35,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 10px 15px;
     }
     
     .topo-fino .logo img {
@@ -61,7 +62,6 @@
       color: #ccc;
     }
     
-    /* Banner responsivo */
     .banner {
       width: 100%;
       height: auto;
@@ -383,7 +383,6 @@
       100% { transform: rotate(360deg); }
     }
     
-    /* Media queries para responsividade do banner */
     @media (min-width: 1200px) {
       .banner {
         height: 400px;
@@ -466,12 +465,11 @@
 </head>
 
 <body>
-  <!-- Topo Fino -->
   <header class="topo-fino" id="topoFino">
     <div class="container">
       <div class="logo">
         <a href="https://faculdadedofuturo.com.br/" target="_blank">
-          <img src="imagem/LogoFAF.png" loading="lazy" alt="Faculdade do Futuro" style="margin-right: auto;">
+          <img src="https://faculdadedofuturo.com.br/wp-content/uploads/2021/08/Logo-Horizontal-Branco-1.png" loading="lazy" alt="Faculdade do Futuro" style="height: 45px;">
         </a>
       </div>
       <div class="links">
@@ -484,14 +482,12 @@
     </div>
   </header>
 
-  <!-- Banner dinâmico será preenchido via JS -->
   <header>
     <div class="banner" id="curso-banner">
-      <img src="imagem\Inicio.svg" loading="lazy" alt="Banner do Curso" id="banner-image">
+      <img src="https://faculdadedofuturo.com.br/wp-content/uploads/2021/08/banner-site-1.jpg" loading="lazy" alt="Banner do Curso" id="banner-image">
     </div>
   </header>
 
-  <!-- Back to top -->
   <button id="back-to-top" title="Voltar ao topo" class="seta">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
       <path fill-rule="evenodd" clip-rule="evenodd"
@@ -500,10 +496,8 @@
     </svg>
   </button>
 
-  <!-- Conteúdo -->
   <div class="conteudo">
     <div class="container">
-      <!-- Seletor de Curso e Ano -->
       <div class="curso-selector-container">
         <div class="curso-selector-wrapper">
           <div class="curso-selector">
@@ -541,7 +535,6 @@
         </div>
       </div>
 
-      <!-- Informações do Curso -->
       <div class="bloco">
         <div class="titulo-interior">
           <h3 id="curso-nome">Selecione um curso para ver as informações</h3>
@@ -549,7 +542,6 @@
         </div>
       </div>
 
-      <!-- Períodos -->
       <div class="periodo">
         <div class="row">
           <div class="col-sm-3">
@@ -561,14 +553,12 @@
           <div class="col-sm-9">
             <div class="lista-periodos" id="lista-periodos">
               <ul id="periodos">
-                <!-- Períodos serão gerados dinamicamente via JavaScript -->
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Container para disciplinas (será preenchido via JS) -->
       <div id="disciplinas-container">
         <div class="loading" id="loading-disciplinas">
           <div class="loading-spinner"></div>
@@ -576,19 +566,15 @@
         </div>
       </div>
 
-      <!-- Botão para mostrar todos os períodos -->
       <div class="text-center">
         <button id="btn-mostrar-todos" class="btn-mostrar-todos">Mostrar Todos os Períodos</button>
       </div>
 
-      <!-- Detalhes da disciplina (será preenchido via JS) -->
       <div id="detalhes-disciplina" class="detalhes-disciplina">
-        <!-- Detalhes serão carregados aqui -->
       </div>
     </div>
   </div>
 
-  <!-- Rodapé compacto -->
   <footer>
     <div class="footer-container">
       <div>
@@ -616,27 +602,76 @@
       </div>
     </div>
     
-    <!-- Seção de direitos reservados -->
     <div class="footer-copyright">
       <span>Faculdade do Futuro © 2025. Todos os direitos reservados.</span>
     </div>
   </footer>
 
   <script>
-    // Variável global para armazenar o período ativo
     let periodoAtivo = null;
     let todosPeriodos = [];
     let cursoAtual = null;
     let anoAtual = null;
 
-    // Função para mostrar email de desenvolvedor
+    const dadosExemplo = {
+      "administracao": {
+        "2025": [
+          {
+            "DICIPLINA": "Introdução à Administração",
+            "ABREVIAÇÃO": "IADM",
+            "PERÍODO": 1,
+            "SEMESTRE": "2025/1",
+            "CH TOTAL": "60",
+            "CH TEORICA": "40",
+            "CH PRATICA": "20",
+            "CH SEMANAL": "4",
+            "CREDITO": "4",
+            "MODALIDADE": "Presencial",
+            "ANO": "2025",
+            "EMENTÁRIO": "Conceitos básicos de administração. Funções administrativas. Evolução da teoria administrativa."
+          },
+          {
+            "DICIPLINA": "Matemática Aplicada",
+            "ABREVIAÇÃO": "MATAP",
+            "PERÍODO": 1,
+            "SEMESTRE": "2025/1",
+            "CH TOTAL": "60",
+            "CH TEORICA": "60",
+            "CH PRATICA": "-",
+            "CH SEMANAL": "4",
+            "CREDITO": "4",
+            "MODALIDADE": "Presencial",
+            "ANO": "2025",
+            "EMENTÁRIO": "Aplicações de matemática em problemas administrativos e financeiros."
+          }
+        ]
+      },
+      "direito": {
+        "2025": [
+          {
+            "DICIPLINA": "Introdução ao Direito",
+            "ABREVIAÇÃO": "IDIR",
+            "PERÍODO": 1,
+            "SEMESTRE": "2025/1",
+            "CH TOTAL": "60",
+            "CH TEORICA": "50",
+            "CH PRATICA": "10",
+            "CH SEMANAL": "4",
+            "CREDITO": "4",
+            "MODALIDADE": "Presencial",
+            "ANO": "2025",
+            "EMENTÁRIO": "Noções fundamentais do Direito. Fontes do Direito. Ramos do Direito."
+          }
+        ]
+      }
+    };
+
     function mostrarEmail() {
       const emailElement = document.getElementById('email');
       emailElement.style.display = emailElement.style.display === 'none' ? 'block' : 'none';
       return false;
     }
 
-    // Função para limpar o conteúdo
     function limparConteudo() {
       document.getElementById('periodos').innerHTML = '';
       document.getElementById('disciplinas-container').innerHTML = '';
@@ -647,25 +682,21 @@
       document.getElementById('ano-curso').textContent = '';
     }
 
-    // Função para verificar se deve carregar o curso
     function verificarEcarregar() {
       const cursoSelecionado = document.getElementById('select-curso').value;
       const anoSelecionado = document.getElementById('select-ano').value;
       
-      // Limpar o conteúdo se algum select for alterado
       limparConteudo();
       
       if (cursoSelecionado && anoSelecionado) {
         carregarCurso(cursoSelecionado, anoSelecionado);
         
-        // Atualizar URL com os parâmetros
         const novaURL = window.location.origin + window.location.pathname + 
                         '?curso=' + cursoSelecionado + '&ano=' + anoSelecionado;
         window.history.replaceState({}, '', novaURL);
       }
     }
 
-    // Função para mostrar/ocultar loading
     function toggleLoading(show) {
       const loadingElement = document.getElementById('loading-disciplinas');
       if (loadingElement) {
@@ -673,24 +704,20 @@
       }
     }
 
-    // Função para filtrar períodos
     function filtrarPeriodos(periodo) {
       const periodos = document.querySelectorAll('.bloco-periodo');
       const btnMostrarTodos = document.getElementById('btn-mostrar-todos');
       
       if (periodo === 'todos') {
-        // Mostrar todos os períodos
         periodos.forEach(p => p.classList.remove('hidden'));
         if (btnMostrarTodos) btnMostrarTodos.style.display = 'none';
         
-        // Remover classe ativa de todos os links
         document.querySelectorAll('.link-ancora').forEach(link => {
           link.classList.remove('ativo');
         });
         
         periodoAtivo = null;
       } else {
-        // Esconder todos os períodos e mostrar apenas o selecionado
         periodos.forEach(p => {
           if (p.id === `periodo-${periodo}`) {
             p.classList.remove('hidden');
@@ -699,7 +726,6 @@
           }
         });
         
-        // Destacar o link do período ativo
         document.querySelectorAll('.link-ancora').forEach(link => {
           if (link.getAttribute('data-periodo') === periodo.toString()) {
             link.classList.add('ativo');
@@ -708,25 +734,20 @@
           }
         });
         
-        // Mostrar botão "Mostrar Todos"
         if (btnMostrarTodos) btnMostrarTodos.style.display = 'block';
         periodoAtivo = periodo;
       }
     }
 
-    // Função para carregar JSON de um arquivo externo
     async function carregarCurso(cursoId, ano) {
-      // Se já estamos carregando este curso e ano, não fazer nada
       if (cursoAtual === cursoId && anoAtual === ano) return;
       
       try {
         cursoAtual = cursoId;
         anoAtual = ano;
         
-        // Mostrar loading
         toggleLoading(true);
         
-        // Limpar containers
         document.getElementById('disciplinas-container').innerHTML = '';
         const detalhesContainer = document.getElementById('detalhes-disciplina');
         if (detalhesContainer) detalhesContainer.classList.remove('ativo');
@@ -734,31 +755,38 @@
         const btnMostrarTodos = document.getElementById('btn-mostrar-todos');
         if (btnMostrarTodos) btnMostrarTodos.style.display = 'none';
         
-        // Carregar o JSON do curso e ano selecionados
-        const response = await fetch(`json/${cursoId} ${ano}.json`);
-        if (!response.ok) {
-          throw new Error('Curso/ano não encontrado');
+        let disciplinas = [];
+        
+        try {
+          const response = await fetch(`json/${cursoId} ${ano}.json`);
+          if (response.ok) {
+            disciplinas = await response.json();
+          } else {
+            throw new Error('Arquivo não encontrado, usando dados de exemplo');
+          }
+        } catch (error) {
+          console.warn('Não foi possível carregar o arquivo JSON, usando dados de exemplo:', error);
+          
+          if (dadosExemplo[cursoId] && dadosExemplo[cursoId][ano]) {
+            disciplinas = dadosExemplo[cursoId][ano];
+          } else {
+            throw new Error('Nenhum dado disponível para este curso/ano');
+          }
         }
         
-        const disciplinas = await response.json();
-        
-        // Verificar se temos disciplinas
         if (!disciplinas || disciplinas.length === 0) {
           throw new Error('Nenhuma disciplina encontrada para este curso/ano');
         }
         
-        // Atualizar nome do curso
         const selectElement = document.getElementById('select-curso');
-        const nomeCurso = selectElement.options[selectElement.selectedIndex].text.split(' (')[0]; // Remove parênteses se houver
+        const nomeCurso = selectElement.options[selectElement.selectedIndex].text.split(' (')[0];
         document.getElementById('curso-nome').textContent = nomeCurso;
         document.getElementById('curso-descricao').textContent = `${disciplinas[0].MODALIDADE} - ${disciplinas[0].ANO}`;
         document.getElementById('ano-curso').textContent = disciplinas[0].ANO;
 
-        // Encontrar períodos únicos
         const periodosUnicos = [...new Set(disciplinas.map(d => d.PERÍODO))].sort((a, b) => a - b);
         todosPeriodos = periodosUnicos;
         
-        // Gerar os períodos
         const periodosContainer = document.getElementById('periodos');
         periodosContainer.innerHTML = '';
         
@@ -768,14 +796,12 @@
           periodosContainer.appendChild(li);
         });
         
-        // Adicionar event listeners para os links dos períodos
         document.querySelectorAll('.link-ancora[data-periodo]').forEach(link => {
           link.addEventListener('click', function(e) {
             e.preventDefault();
             const periodo = this.getAttribute('data-periodo');
             filtrarPeriodos(periodo);
             
-            // Rolar para o topo das disciplinas
             const disciplinasContainer = document.getElementById('disciplinas-container');
             if (disciplinasContainer) {
               window.scrollTo({
@@ -786,7 +812,6 @@
           });
         });
         
-        // Gerar as disciplinas por período
         const disciplinasContainerElement = document.getElementById('disciplinas-container');
         disciplinasContainerElement.innerHTML = '';
         
@@ -833,7 +858,6 @@
           disciplinasContainerElement.appendChild(section);
         });
         
-        // Adicionar event listeners para os cards de disciplina
         document.querySelectorAll('.disciplina-card').forEach(card => {
           card.addEventListener('click', function() {
             const disciplinaData = JSON.parse(this.getAttribute('data-disciplina'));
@@ -841,7 +865,6 @@
           });
         });
         
-        // Adicionar event listener para o botão "Mostrar Todos"
         const btnMostrarTodosElement = document.getElementById('btn-mostrar-todos');
         if (btnMostrarTodosElement) {
           btnMostrarTodosElement.addEventListener('click', function() {
@@ -849,7 +872,6 @@
           });
         }
         
-        // Resetar para mostrar todos os períodos inicialmente
         filtrarPeriodos('todos');
         
       } catch (error) {
@@ -862,22 +884,18 @@
           </div>
         `;
         
-        // Resetar curso e ano atual em caso de erro
         cursoAtual = null;
         anoAtual = null;
       } finally {
-        // Esconder loading
         toggleLoading(false);
       }
     }
 
-    // Função para mostrar detalhes da disciplina
     function mostrarDetalhesDisciplina(disciplina) {
       const detalhesContainer = document.getElementById('detalhes-disciplina');
       if (!detalhesContainer) return;
       
       let pdfLink = '';
-      // Verificar múltiplas possibilidades de nome para a propriedade do PDF
       const pdfUrl = disciplina.PDFs || disciplina.PDF || disciplina.pdf || disciplina.Pdf || disciplina.arquivo || disciplina.Arquivo;
       
       if (pdfUrl && pdfUrl.trim() !== '' && pdfUrl.trim() !== '-') {
@@ -901,23 +919,19 @@
       
       detalhesContainer.classList.add('ativo');
       
-      // Rolagem para os detalhes
       setTimeout(() => {
         detalhesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }
 
-    // Event listeners para os seletores
     document.getElementById('select-curso').addEventListener('change', verificarEcarregar);
     document.getElementById('select-ano').addEventListener('change', verificarEcarregar);
 
-    // Verificar se há parâmetros de curso e ano na URL
     document.addEventListener('DOMContentLoaded', function() {
       const urlParams = new URLSearchParams(window.location.search);
       const cursoId = urlParams.get('curso');
       const ano = urlParams.get('ano');
       
-      // Definir valores nos selects se existirem na URL
       if (cursoId) {
         document.getElementById('select-curso').value = cursoId;
       }
@@ -926,12 +940,10 @@
         document.getElementById('select-ano').value = ano;
       }
       
-      // Carregar curso se ambos estiverem selecionados
       if (cursoId && ano) {
         carregarCurso(cursoId, ano);
       }
       
-      // Botão voltar ao topo
       const backToTopButton = document.getElementById('back-to-top');
       
       window.addEventListener('scroll', () => {
