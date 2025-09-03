@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cursos da Faculdade do Futuro - disciplinas e informações.">
+  <title>Cursos - Faculdade do Futuro</title>
+  <link rel="icon" href="imagem/favicon.ico" type="image/ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #e67e22;
+      --accent-color: #e74c3c;
+      --light-color: #ecf0f1;
+      --dark-color: #2c3e50;
+      --header-footer-color: rgba(0, 0, 0, 0.85);
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    .topo-fino {
+      background-color: var(--header-footer-color);
+      color: white;
+      backdrop-filter: blur(5px);
+    }
+    
+    .topo-fino .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .topo-fino .logo img {
+      height: 60px;
+    }
+    
+    .topo-fino .links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .topo-fino .links a:hover {
+      color: var(--secondary-color);
+    }
+    
+    .topo-fino .links a.ativo {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+    
+    .topo-fino .links span {
+      margin: 0 5px;
+      color: #ccc;
+    }
+    
+    /* Banner responsivo */
+    .banner {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .banner img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    
+    .conteudo {
+      padding: 30px 0;
+    }
+    
+    .periodo {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    .titulo-interior {
+      margin-bottom: 20px;
+    }
+    
+    .lista-periodos ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .lista-periodos li {
+      margin-top: 24px;
+    }
+    
+    .link-ancora {
+      display: block;
+      padding: 10px 15px;
+      background-color: var(--secondary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .link-ancora:hover, .link-ancora.ativo {
+      background-color: #d35400;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .bloco {
+      margin-bottom: 40px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .disciplinas-blocos {
+      margin-top: 20px;
+    }
+    
+    .disciplinas-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+    }
+    
+    .disciplina-card {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--secondary-color);
+      border-radius: 8px;
+      padding: 15px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .disciplina-card:hover {
+      background-color: #f1f3f5;
+      transform: translateX(5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .disciplina-card h5 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    
+    .disciplina-card .abreviacao {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-right: 8px;
+    }
+    
+    .detalhes-disciplina {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      display: none;
+      border-left: 4px solid var(--secondary-color);
+    }
+    
+    .detalhes-disciplina.ativo {
+      display: block;
+    }
+    
+    .detalhes-disciplina h4 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .detalhes-disciplina .info-item {
+      margin-bottom: 10px;
+    }
+    
+    .detalhes-disciplina .info-item strong {
+      display: inline-block;
+      width: 180px;
+      color: var(--dark-color);
+    }
+    
+    #back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: none;
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+    
+    #back-to-top:hover {
+      background-color: #d35400;
+      transform: translateY(-3px);
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      background-color: var(--header-footer-color);
+      color: white;
+      padding: 25px 20px;
+      backdrop-filter: blur(5px);
+    }
+    
+    .footer-container h3 {
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    
+    .footer-container p {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    
+    .footer-container a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-container a:hover {
+      color: var(--secondary-color);
+    }
+    
+    .footer-copyright {
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.85rem;
+    }
+    
+    #email {
+      display: none;
+      color: var(--secondary-color);
+    }
+    
+    .curso-selector-container {
+      display: flex;
+      margin: 30px 0;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .curso-selector-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: flex-start;
+      align-items: flex-end;
+    }
+    
+    .curso-selector {
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    
+    .curso-selector.simple {
+      max-width: 200px;
+    }
+    
+    .curso-selector label {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .curso-selector.simple label {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    
+    .curso-selector select {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 2px solid #e0e0e0;
+      width: 100%;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background-color: #f8f9fa;
+    }
+    
+    .curso-selector select:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+      outline: none;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #6c757d;
+    }
+    
+    .loading-spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--secondary-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    
+    .btn-pdf {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    
+    .btn-pdf:hover {
+      background-color: #c0392b;
+      color: white;
+    }
+    
+    .btn-mostrar-todos {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .btn-mostrar-todos:hover {
+      background-color: #d35400;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Media queries para responsividade do banner */
+    @media (min-width: 1200px) {
+      .banner {
+        height: 400px;
+      }
+      .banner img {
+        height: 400px;
+      }
+    }
+    
+    @media (max-width: 1199px) and (min-width: 992px) {
+      .banner {
+        height: 350px;
+      }
+      .banner img {
+        height: 350px;
+      }
+    }
+    
+    @media (max-width: 991px) and (min-width: 768px) {
+      .banner {
+        height: 300px;
+      }
+      .banner img {
+        height: 300px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .banner {
+        height: 250px;
+      }
+      .banner img {
+        height: 250px;
+      }
+      
+      .detalhes-disciplina .info-item strong {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+      }
+      
+      .topo-fino .logo img {
+        height: 45px;
+      }
+      
+      .curso-selector {
+        padding: 15px;
+      }
+      
+      .curso-selector.simple {
+        max-width: 100%;
+      }
+      
+      .curso-selector-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 20px 15px;
+        gap: 15px;
+      }
+      
+      .footer-container h3 {
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .banner {
+        height: 135px;
+      }
+      .banner img {
+        height: 135px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Topo Fino -->
+  <header class="topo-fino" id="topoFino">
+    <div class="container">
+      <div class="logo">
+        <a href="https://faculdadedofuturo.com.br/" target="_blank">
+          <img src="imagem/LogoFAF.png" loading="lazy" alt="Faculdade do Futuro" style="margin-right: auto;">
+        </a>
+      </div>
+      <div class="links">
+        <a href="https://faculdadedofuturo.com.br/">Inicio </a>
+        <span>&gt;</span>
+        <a id="catalogo">&nbsp;Catálogo</a>
+        <span>&gt;</span>
+        <a class="ativo" href="#">&nbsp;Curso</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner dinâmico será preenchido via JS -->
+  <header>
+    <div class="banner" id="curso-banner">
+      <img src="imagem\Inicio.svg" loading="lazy" alt="Banner do Curso" id="banner-image">
+    </div>
+  </header>
+
+  <!-- Back to top -->
+  <button id="back-to-top" title="Voltar ao topo" class="seta">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M15.0001 6.58571C15.3906 6.97624 15.3906 7.6094 15.0001 7.99992C14.6096 8.39045 13.9764 8.39045 13.5859 7.99993L8.00008 2.41414L2.41429 7.99992C2.02376 8.39045 1.3906 8.39045 1.00008 7.99992C0.609551 7.6094 0.609551 6.97624 1.00008 6.58571L7.15155 0.43424C7.62018 -0.03439 8.37997 -0.03439 8.8486 0.43424L15.0001 6.58571Z"
+        fill="currentColor"></path>
+    </svg>
+  </button>
+
+  <!-- Conteúdo -->
+  <div class="conteudo">
+    <div class="container">
+      <!-- Seletor de Curso e Ano -->
+      <div class="curso-selector-container">
+        <div class="curso-selector-wrapper">
+          <div class="curso-selector">
+            <label for="select-curso">Selecione o Curso</label>
+            <select id="select-curso" class="form-select">
+              <option value="">-- Selecione um curso --</option>
+              <option value="administracao">ADMINISTRAÇÃO (Presencial)</option>
+              <option value="direito">DIREITO</option>
+              <option value="arquitetura">ARQUITETURA E URBANISMO</option>
+              <option value="ciencias_biologicas">CIÊNCIAS BIOLÓGICAS</option>
+              <option value="ciencias_contabeis">CIÊNCIAS CONTÁBEIS (Presencial)</option>
+              <option value="educacao_fisica">EDUCAÇÃO FÍSICA</option>
+              <option value="enfermagem">ENFERMAGEM</option>
+              <option value="engenharia_ambiental">ENGENHARIA AMBIENTAL</option>
+              <option value="engenharia_civil">ENGENHARIA CIVIL</option>
+              <option value="engenharia_producao">ENGENHARIA DE PRODUÇÃO</option>
+              <option value="gestao_rh">GESTÃO DE RECURSOS HUMANOS</option>
+              <option value="medicina_veterinaria">MEDICINA VETERINÁRIA</option>
+              <option value="pedagogia">PEDAGOGIA</option>
+              <option value="psicologia">PSICOLOGIA</option>
+              <option value="farmacia">FARMÁCIA GENERALISTA</option>
+              <option value="agronomia">AGRONOMIA</option>
+            </select>
+          </div>
+          
+          <div class="curso-selector simple">
+            <label for="select-ano">Ano</label>
+            <select id="select-ano" class="form-select">
+              <option value="">-- Ano --</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informações do Curso -->
+      <div class="bloco">
+        <div class="titulo-interior">
+          <h3 id="curso-nome">Selecione um curso para ver as informações</h3>
+          <p id="curso-descricao"></p>
+        </div>
+      </div>
+
+      <!-- Períodos -->
+      <div class="periodo">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="titulo-interior">
+              <p id="ano-curso"></p>
+              <h4>Selecione o Periodo:</h4>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="lista-periodos" id="lista-periodos">
+              <ul id="periodos">
+                <!-- Períodos serão gerados dinamicamente via JavaScript -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Container para disciplinas (será preenchido via JS) -->
+      <div id="disciplinas-container">
+        <div class="loading" id="loading-disciplinas">
+          <div class="loading-spinner"></div>
+          <p>Carregando disciplinas...</p>
+        </div>
+      </div>
+
+      <!-- Botão para mostrar todos os períodos -->
+      <div class="text-center">
+        <button id="btn-mostrar-todos" class="btn-mostrar-todos">Mostrar Todos os Períodos</button>
+      </div>
+
+      <!-- Detalhes da disciplina (será preenchido via JS) -->
+      <div id="detalhes-disciplina" class="detalhes-disciplina">
+        <!-- Detalhes serão carregados aqui -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé compacto -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Conheça também</h3>
+        <img width="120" height="53"
+          src="https://faculdadedofuturo.com.br/wp-content/uploads/2021/08/Logo-EF-300x139.png" class="Logo-esc"
+          loading="lazy" alt="Logo Escola do Futuro">
+      </div>
+      <div>
+        <h3>Fale conosco</h3>
+        <p>Rua Duarte Peixoto 259, Coqueiro, Manhuaçu/MG</p>
+        <p>(33) 3331-1214</p>
+        <p>contato@faculdadedofuturo.edu.br</p>
+      </div>
+      <div>
+        <h3>Integridade</h3>
+        <p><a href="#">Termos de Uso</a></p>
+        <p><a href="#">Política de Privacidade</a></p>
+        <p><a href="#" onclick="mostrarEmail(); return false;">Desenvolvido por</a></p>
+        <p id="email">pedro.silva.ribeiro360@gmail.com</p>
+      </div>
+      <div>
+        <h3>LGPD</h3>
+        <p><a href="https://faculdadedofuturo.com.br/privacidade/">Lei Geral de Proteção de Dados</a></p>
+      </div>
+    </div>
+    
+    <!-- Seção de direitos reservados -->
+    <div class="footer-copyright">
+      <span>Faculdade do Futuro © 2025. Todos os direitos reservados.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Variável global para armazenar o período ativo
+    let periodoAtivo = null;
+    let todosPeriodos = [];
+    let cursoAtual = null;
+    let anoAtual = null;
+
+    // Função para mostrar email de desenvolvedor
+    function mostrarEmail() {
+      const emailElement = document.getElementById('email');
+      emailElement.style.display = emailElement.style.display === 'none' ? 'block' : 'none';
+      return false;
+    }
+
+    // Função para limpar o conteúdo
+    function limparConteudo() {
+      document.getElementById('periodos').innerHTML = '';
+      document.getElementById('disciplinas-container').innerHTML = '';
+      document.getElementById('detalhes-disciplina').classList.remove('ativo');
+      document.getElementById('btn-mostrar-todos').style.display = 'none';
+      document.getElementById('curso-nome').textContent = 'Selecione um curso para ver as informações';
+      document.getElementById('curso-descricao').textContent = '';
+      document.getElementById('ano-curso').textContent = '';
+    }
+
+    // Função para verificar se deve carregar o curso
+    function verificarEcarregar() {
+      const cursoSelecionado = document.getElementById('select-curso').value;
+      const anoSelecionado = document.getElementById('select-ano').value;
+      
+      // Limpar o conteúdo se algum select for alterado
+      limparConteudo();
+      
+      if (cursoSelecionado && anoSelecionado) {
+        carregarCurso(cursoSelecionado, anoSelecionado);
+        
+        // Atualizar URL com os parâmetros
+        const novaURL = window.location.origin + window.location.pathname + 
+                        '?curso=' + cursoSelecionado + '&ano=' + anoSelecionado;
+        window.history.replaceState({}, '', novaURL);
+      }
+    }
+
+    // Função para mostrar/ocultar loading
+    function toggleLoading(show) {
+      const loadingElement = document.getElementById('loading-disciplinas');
+      if (loadingElement) {
+        loadingElement.style.display = show ? 'block' : 'none';
+      }
+    }
+
+    // Função para filtrar períodos
+    function filtrarPeriodos(periodo) {
+      const periodos = document.querySelectorAll('.bloco-periodo');
+      const btnMostrarTodos = document.getElementById('btn-mostrar-todos');
+      
+      if (periodo === 'todos') {
+        // Mostrar todos os períodos
+        periodos.forEach(p => p.classList.remove('hidden'));
+        if (btnMostrarTodos) btnMostrarTodos.style.display = 'none';
+        
+        // Remover classe ativa de todos os links
+        document.querySelectorAll('.link-ancora').forEach(link => {
+          link.classList.remove('ativo');
+        });
+        
+        periodoAtivo = null;
+      } else {
+        // Esconder todos os períodos e mostrar apenas o selecionado
+        periodos.forEach(p => {
+          if (p.id === `periodo-${periodo}`) {
+            p.classList.remove('hidden');
+          } else {
+            p.classList.add('hidden');
+          }
+        });
+        
+        // Destacar o link do período ativo
+        document.querySelectorAll('.link-ancora').forEach(link => {
+          if (link.getAttribute('data-periodo') === periodo.toString()) {
+            link.classList.add('ativo');
+          } else {
+            link.classList.remove('ativo');
+          }
+        });
+        
+        // Mostrar botão "Mostrar Todos"
+        if (btnMostrarTodos) btnMostrarTodos.style.display = 'block';
+        periodoAtivo = periodo;
+      }
+    }
+
+    // Função para carregar JSON de um arquivo externo
+    async function carregarCurso(cursoId, ano) {
+      // Se já estamos carregando este curso e ano, não fazer nada
+      if (cursoAtual === cursoId && anoAtual === ano) return;
+      
+      try {
+        cursoAtual = cursoId;
+        anoAtual = ano;
+        
+        // Mostrar loading
+        toggleLoading(true);
+        
+        // Limpar containers
+        document.getElementById('disciplinas-container').innerHTML = '';
+        const detalhesContainer = document.getElementById('detalhes-disciplina');
+        if (detalhesContainer) detalhesContainer.classList.remove('ativo');
+        
+        const btnMostrarTodos = document.getElementById('btn-mostrar-todos');
+        if (btnMostrarTodos) btnMostrarTodos.style.display = 'none';
+        
+        // Carregar o JSON do curso e ano selecionados
+        const response = await fetch(`json/${cursoId} ${ano}.json`);
+        if (!response.ok) {
+          throw new Error('Curso/ano não encontrado');
+        }
+        
+        const disciplinas = await response.json();
+        
+        // Verificar se temos disciplinas
+        if (!disciplinas || disciplinas.length === 0) {
+          throw new Error('Nenhuma disciplina encontrada para este curso/ano');
+        }
+        
+        // Atualizar nome do curso
+        const selectElement = document.getElementById('select-curso');
+        const nomeCurso = selectElement.options[selectElement.selectedIndex].text.split(' (')[0]; // Remove parênteses se houver
+        document.getElementById('curso-nome').textContent = nomeCurso;
+        document.getElementById('curso-descricao').textContent = `${disciplinas[0].MODALIDADE} - ${disciplinas[0].ANO}`;
+        document.getElementById('ano-curso').textContent = disciplinas[0].ANO;
+
+        // Encontrar períodos únicos
+        const periodosUnicos = [...new Set(disciplinas.map(d => d.PERÍODO))].sort((a, b) => a - b);
+        todosPeriodos = periodosUnicos;
+        
+        // Gerar os períodos
+        const periodosContainer = document.getElementById('periodos');
+        periodosContainer.innerHTML = '';
+        
+        periodosUnicos.forEach(periodo => {
+          const li = document.createElement('li');
+          li.innerHTML = `<nav><a class="link-ancora" href="#periodo-${periodo}" title="Período ${periodo}" data-periodo="${periodo}">${periodo}º</a></nav>`;
+          periodosContainer.appendChild(li);
+        });
+        
+        // Adicionar event listeners para os links dos períodos
+        document.querySelectorAll('.link-ancora[data-periodo]').forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const periodo = this.getAttribute('data-periodo');
+            filtrarPeriodos(periodo);
+            
+            // Rolar para o topo das disciplinas
+            const disciplinasContainer = document.getElementById('disciplinas-container');
+            if (disciplinasContainer) {
+              window.scrollTo({
+                top: disciplinasContainer.offsetTop - 100,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+        
+        // Gerar as disciplinas por período
+        const disciplinasContainerElement = document.getElementById('disciplinas-container');
+        disciplinasContainerElement.innerHTML = '';
+        
+        periodosUnicos.forEach(periodo => {
+          const disciplinasPeriodo = disciplinas.filter(d => d.PERÍODO === periodo);
+          
+          const section = document.createElement('div');
+          section.className = 'bloco bloco-periodo';
+          section.id = `periodo-${periodo}`;
+          
+          let disciplinasHTML = '';
+          
+          disciplinasPeriodo.forEach(disciplina => {
+            disciplinasHTML += `
+              <div class="disciplina-card" data-disciplina='${JSON.stringify(disciplina).replace(/'/g, "&#39;")}'>
+                <h5><span class="abreviacao">${disciplina.ABREVIAÇÃO}</span> ${disciplina.DICIPLINA}</h5>
+                <div class="info-item"><strong>Carga Horária:</strong> ${disciplina["CH TOTAL"]}h</div>
+                <div class="info-item"><strong>Créditos:</strong> ${disciplina.CREDITO}</div>
+              </div>
+            `;
+          });
+          
+          section.innerHTML = `
+            <section>
+              <div class="container">
+                <div class="row">
+                  <div class="titulo-interior">
+                    <h3>Disciplinas ${periodo}º Período</h3>
+                  </div>
+                </div>
+                <div class="disciplinas-blocos">
+                  <div class="row">
+                    <div class="bloco">
+                      <div class="disciplinas-container">
+                        ${disciplinasHTML}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          `;
+          
+          disciplinasContainerElement.appendChild(section);
+        });
+        
+        // Adicionar event listeners para os cards de disciplina
+        document.querySelectorAll('.disciplina-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const disciplinaData = JSON.parse(this.getAttribute('data-disciplina'));
+            mostrarDetalhesDisciplina(disciplinaData);
+          });
+        });
+        
+        // Adicionar event listener para o botão "Mostrar Todos"
+        const btnMostrarTodosElement = document.getElementById('btn-mostrar-todos');
+        if (btnMostrarTodosElement) {
+          btnMostrarTodosElement.addEventListener('click', function() {
+            filtrarPeriodos('todos');
+          });
+        }
+        
+        // Resetar para mostrar todos os períodos inicialmente
+        filtrarPeriodos('todos');
+        
+      } catch (error) {
+        console.error('Erro ao carregar o curso:', error);
+        document.getElementById('disciplinas-container').innerHTML = `
+          <div class="alert alert-danger">
+            <h4>Erro ao carregar o curso</h4>
+            <p>Não foi possível carregar as informações do curso/ano selecionado.</p>
+            <p>Detalhes: ${error.message}</p>
+          </div>
+        `;
+        
+        // Resetar curso e ano atual em caso de erro
+        cursoAtual = null;
+        anoAtual = null;
+      } finally {
+        // Esconder loading
+        toggleLoading(false);
+      }
+    }
+
+    // Função para mostrar detalhes da disciplina
+    function mostrarDetalhesDisciplina(disciplina) {
+      const detalhesContainer = document.getElementById('detalhes-disciplina');
+      if (!detalhesContainer) return;
+      
+      let pdfLink = '';
+      // Verificar múltiplas possibilidades de nome para a propriedade do PDF
+      const pdfUrl = disciplina.PDFs || disciplina.PDF || disciplina.pdf || disciplina.Pdf || disciplina.arquivo || disciplina.Arquivo;
+      
+      if (pdfUrl && pdfUrl.trim() !== '' && pdfUrl.trim() !== '-') {
+        pdfLink = `<a href="${pdfUrl}" target="_blank" class="btn-pdf"><i class="fas fa-file-pdf me-2"></i>Ver PDF da Disciplina</a>`;
+      }
+      
+      detalhesContainer.innerHTML = `
+        <h4>${disciplina.DICIPLINA} (${disciplina.ABREVIAÇÃO})</h4>
+        <div class="info-item"><strong>Período:</strong> ${disciplina.PERÍODO}º</div>
+        <div class="info-item"><strong>Semestre:</strong> ${disciplina.SEMESTRE}</div>
+        <div class="info-item"><strong>Carga Horária Total:</strong> ${disciplina["CH TOTAL"]}h</div>
+        <div class="info-item"><strong>Carga Horária Teórica:</strong> ${disciplina["CH TEORICA"]}h</div>
+        <div class="info-item"><strong>Carga Horária Prática:</strong> ${disciplina["CH PRATICA"] !== "-" ? disciplina["CH PRATICA"] + "h" : "Não aplicável"}</div>
+        <div class="info-item"><strong>Carga Horária Semanal:</strong> ${disciplina["CH SEMANAL"]}h</div>
+        <div class="info-item"><strong>Créditos:</strong> ${disciplina.CREDITO}</div>
+        
+        <div class="info-item"><strong>Ementário:</strong><br>${disciplina.EMENTÁRIO}</div>
+        
+        ${pdfLink}
+      `;
+      
+      detalhesContainer.classList.add('ativo');
+      
+      // Rolagem para os detalhes
+      setTimeout(() => {
+        detalhesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+
+    // Event listeners para os seletores
+    document.getElementById('select-curso').addEventListener('change', verificarEcarregar);
+    document.getElementById('select-ano').addEventListener('change', verificarEcarregar);
+
+    // Verificar se há parâmetros de curso e ano na URL
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cursoId = urlParams.get('curso');
+      const ano = urlParams.get('ano');
+      
+      // Definir valores nos selects se existirem na URL
+      if (cursoId) {
+        document.getElementById('select-curso').value = cursoId;
+      }
+      
+      if (ano) {
+        document.getElementById('select-ano').value = ano;
+      }
+      
+      // Carregar curso se ambos estiverem selecionados
+      if (cursoId && ano) {
+        carregarCurso(cursoId, ano);
+      }
+      
+      // Botão voltar ao topo
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      window.addEventListener('scroll', () => {
+        if (backToTopButton) {
+          if (window.pageYOffset > 300) {
+            backToTopButton.style.display = 'flex';
+          } else {
+            backToTopButton.style.display = 'none';
+          }
+        }
+      });
+      
+      if (backToTopButton) {
+        backToTopButton.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
